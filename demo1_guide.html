@@ -1,0 +1,145 @@
+<!DOCTYPE>
+<html>
+<head>
+	<title>vue测试</title>
+	<meta charset="utf-8"/>
+</head>
+<body>
+
+	<script type="text/javascript" src="js/vue.js"></script>
+
+	<h1>demo1</h1>
+	<p>打开控制台试着修改app1.message的值</p>
+	<div id="app-1">
+		{{ message }}
+	</div>
+	<script type="text/javascript">
+	var app1 = new Vue(
+	{
+		el: '#app-1',
+		data:
+		{
+			message: 'Hello Vue!'
+		}
+	});
+	</script>
+
+
+	<h1>demo2</h1>
+	<p>打开控制台试着修改app2.message的值</p>
+	<div id="app-2">
+		<span v-bind:title="message">
+			Hover your mouse over me for a few seconds to see my dynamically bound title!
+		</span>
+	</div>
+	<script type="text/javascript">
+		
+	var app2 = new Vue(
+	{
+		el: '#app-2',
+		data:
+		{
+			message: 'You loaded this page on ' + new Date()
+		}
+	});
+	</script>
+
+
+	<h1>demo3</h1>
+	<p>打开控制台试着修改app3.seen=false</p>
+	<div id="app-3">
+	  <p v-if="seen">Now you see me</p>
+	</div>
+	<script type="text/javascript">
+	var app3 = new Vue({
+	  el: '#app-3',
+	  data: {
+	    seen: true
+	  }
+	})
+	</script>
+
+
+	<h1>demo4</h1>
+	<p>打开控制台试着修改app4.todos.pop()或者app4.todos.push({text: '一些字符串'})</p>
+	<div id="app-4">
+	  <ol>
+	    <li v-for="todo in todos">
+	      {{ todo.text }}
+	    </li>
+	  </ol>
+	</div>
+	<script type="text/javascript">
+	var app4 = new Vue({
+	  el: '#app-4',
+	  data: {
+	    todos: [
+	      { text: 'Learn JavaScript' },
+	      { text: 'Learn Vue' },
+	      { text: 'Build something awesome' }
+	    ]
+	  }
+	})
+	</script>
+
+	<h1>demo5</h1>
+	<div id="app-5">
+	  <p>{{ message }}</p>
+	  <button v-on:click="reverseMessage">反转字符串</button>
+	</div>
+	<script type="text/javascript">
+	var app5 = new Vue({
+	  el: '#app-5',
+	  data: {
+	    message: 'Hello Vue.js!'
+	  },
+	  methods: {
+	    reverseMessage: function () {
+	      this.message = this.message.split('').reverse().join('')
+	    }
+	  }
+	})
+	</script>
+
+	<h1>demo6</h1>
+	<p>试着在下面的文本框中输入内容</p>
+	<div id="app-6">
+	  <p>{{ message }}</p>
+	  <input v-model="message">
+	</div>
+
+	<script type="text/javascript">
+	var app6 = new Vue({
+	  el: '#app-6',
+	  data: {
+	    message: 'Hello Vue!'
+	  }
+	})
+	</script>
+	
+	<h1>demo7</h1>
+	<div id="app-7">
+	  <ol>
+	    <!-- Now we provide each todo-item with the todo object    -->
+	    <!-- it's representing, so that its content can be dynamic -->
+	    <todo-item v-for="item in groceryList" v-bind:todo="item"></todo-item>
+	  </ol>
+	</div>
+	<script type="text/javascript">
+	Vue.component('todo-item', {
+	  props: ['todo'],
+	  template: '<li>{{ todo.text }}</li>'
+	})
+	var app7 = new Vue({
+	  el: '#app-7',
+	  data: {
+	    groceryList: [
+	      { text: 'Vegetables' },
+	      { text: 'Cheese' },
+	      { text: 'Whatever else humans are supposed to eat' }
+	    ]
+	  }
+	});
+	</script>
+</body>
+</html>
