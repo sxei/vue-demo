@@ -11,7 +11,26 @@
 	<h1>demo1</h1>
 	<p>打开控制台试着修改app1.message的值</p>
 	<div id="app-1">
-		{{ message }}
+		<input v-model="test">{{test}}
+		<button v-bind:disabled="someDynamicCondition">Button</button>
+		<p>{{message}}</p>
+		<p v-html="message"></p>
+		<p v-if="seen">Now you see me</p>
+		<p>原始数据：{{oldData}}</p>
+		<p>计算之后的数据：{{newData}}</p>
+		<ol>
+			<li v-for="a in array">列表：<span>{{a.text}}</span></li>
+		</ol>
+		<ul>
+			<template v-for="a in array">
+				<li>列表：<span>{{a.text}}</span></li>
+				<li>------------</li>
+			</template>
+		</ul>
+		<input type="checkbox" v-model="checked"/>
+		checked:{{checked}}
+		<br>
+		<input type="checkbox" v-model="pick" v-bind:true-value="a" v-bind:false-value="b"> {{pick}}
 	</div>
 	<script type="text/javascript">
 	var app1 = new Vue(
@@ -19,11 +38,31 @@
 		el: '#app-1',
 		data:
 		{
-			message: 'Hello Vue!'
+			test: '你好好啊，啊啊啊',
+			message: '<span>Hello Vue!</span>',
+			someDynamicCondition: true,
+			seen: true,
+			checked: true,
+			pick: false,
+			a: 'abc',
+			b: 'ddd',
+			oldData: 'Hello Liuxianan!',
+			array:
+			[
+				{text: '你好啊111'},
+				{text: '你好啊222'},
+				{text: '你好啊333'}
+			]
+		},
+		computed:
+		{
+			newData: function()
+			{
+				return this.oldData.split('').reverse().join('');
+			}
 		}
 	});
 	</script>
-
-
+	
 </body>
 </html>
